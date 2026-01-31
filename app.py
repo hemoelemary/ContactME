@@ -74,23 +74,6 @@ def login():
 @app.route("/signup",methods=["POST","GET"])
 def signup():
     return render_template("signup.html")
-
-@app.route("/admin")
-def admin():
-    return render_template("loginadmin.html")
-
-@app.route('/adminpanel',methods=["POST","GET"])
-def adminpanel():
-    if request.method=="POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
-        if email=="admin" and password=="0109471":
-            db= sqlite3.connect("contact.db")
-            cur = db.cursor()
-            cur.execute("SELECT * from user")
-            fetch = cur.fetchall()
-            db.close()
-            return fetch
             
 @app.route("/added",methods=["POST"])
 def added():
@@ -129,6 +112,7 @@ def profilelink(id):
         return render_template("idprofile.html",name=name,email=email,d=my_dict)
     else:
         return "page not found"
+
 
 
 app.run(debug=True)
